@@ -15,6 +15,11 @@ import AuthHelper from "@/helpers/AuthHelper";
 
 // Prevent the splash screen from auto-hiding until we"re ready
 SplashScreen.preventAutoHideAsync();
+const tmp = console.debug;
+// make console.debug always colorized
+console.debug = (...args: any[]) => {
+  tmp(`%c${args[0]}`, "color: #00f", ...args.slice(1));
+};
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Stack } from "expo-router";
 import { ImageBackground, StyleSheet, ScrollView, Dimensions, Alert } from "react-native";
 import { LayoutSpacing } from "../constants/LayoutSpacing";
@@ -19,6 +19,7 @@ export default function Onboarding() {
     const [dangerIndex, setDangerIndex] = useState(-1);
 
     const handleSubmit = () => {
+        setDangerIndex
         if (!ValidationRegexes.name.test(name) || name === "") {
             setDangerIndex(0);
             return;
@@ -40,8 +41,17 @@ export default function Onboarding() {
             return;
         }
 
-
     };
+
+    useEffect(() => {
+        if (process.env.NODE_ENV === "development") {
+            setName("John Doe");
+            setEmail("chetan.kumar.fi@gmail.com");
+            setPhoneNumber("1234567890");
+            setWebsite("https://google.com");
+            setTaxId("taxId123");
+        }
+    }, []);
 
     return (
         <>
